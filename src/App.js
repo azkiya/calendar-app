@@ -8,24 +8,37 @@ import Sidebar from './component/Sidebar'
 const localizer = momentLocalizer(moment)
 export default function App() {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const toggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);
   }
+  const handleAddEvent = (newEvent) => {
+    setEvents([...events, newEvent]);
+    setShowOffcanvas(false);
+  }
+
   return (
     <div className='calendar-container'>
       <div className='btn-container'>
-        <button className='btn-event' onClick={toggleOffcanvas}>
+        <button className='btn-event' onClick={() => { setSelectedEvent(null, toggleOffcanvas()); }}>
           Add Event
         </button>
-        <Sidebar show={showOffcanvas} onHide={toggleOffcanvas} />
+        <Sidebar
+          show={showOffcanvas}
+          onHide={toggleOffcanvas}
+          onAddEvent={handleAddEvent}
+          selectedEvent={selectedEvent}
+        />
       </div>
       <Calendar
         localizer={localizer}
+        events={events}
         startAccessor="start"
         endAccessor="end"
         style={{ height: '100vh' }}
       />
-    </div>
+    </div >
   )
 }
