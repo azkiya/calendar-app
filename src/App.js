@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import './App.css'
+import Sidebar from './component/Sidebar'
 
-function App() {
+const localizer = momentLocalizer(moment)
+export default function App() {
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const toggleOffcanvas = () => {
+    setShowOffcanvas(!showOffcanvas);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='calendar-container'>
+      <div className='btn-container'>
+        <button className='btn-event' onClick={toggleOffcanvas}>
+          Add Event
+        </button>
+        <Sidebar show={showOffcanvas} onHide={toggleOffcanvas} />
+      </div>
+      <Calendar
+        localizer={localizer}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: '100vh' }}
+      />
     </div>
-  );
+  )
 }
-
-export default App;
