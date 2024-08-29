@@ -5,15 +5,14 @@ const eventSchema = new mongoose.Schema({
                 type: String,
                 required: true,
         },
-        start: {
+        description: {
+                type: String,
+                default: null
+        },
+        date: {
                 type: Date,
                 required: true,
         },
-        end: {
-                type: Date,
-                required: true,
-        },
-        description: String,
 });
 
 const Event = mongoose.model('Event', eventSchema);
