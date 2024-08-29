@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import './App.css'
-import Sidebar from './component/Sidebar'
+import React, { useState, useEffect } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './App.css';
+// import Sidebar from './component/Sidebar';
+import Modal from './component/Modal';
+import axios from 'axios';
 
 const localizer = momentLocalizer(moment)
 export default function App() {
@@ -11,12 +13,43 @@ export default function App() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  useEffect(() => {
+    // Ambil semua event dari backend
+    axios.get('http://localhost:4000/api/events')
+      .then(response => {
+        const formattedEvents = response.data.map(event => {
+          const { date } = event;
+          const startDate = moment(date).startOf('day').toDate(); // Start of day
+          const endDate = moment(date).endOf('day').toDate();   // End of day
+          return {
+            title: event.email,
+            start: startDate,
+            end: endDate,
+          };
+        });
+
+        setEvents(formattedEvents);
+      })
+      .catch(error => console.error('Gagal mengambil event:', error));
+  }, []);
+
   const toggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);
   }
   const handleAddEvent = (newEvent) => {
-    setEvents([...events, newEvent]);
+    // setEvents([...events, newEvent]);
     setShowOffcanvas(false);
+    // Simpan event ke backend
+    axios.post('http://localhost:4000/api/events', newEvent)
+      .then(response => {
+        const formattedEvent = {
+          title: response.data.email,
+          start: moment(response.data.date).startOf('day').toDate(),
+          end: moment(response.data.date).endOf('day').toDate()
+        };
+        setEvents(prevEvents => [...prevEvents, formattedEvent]);
+      })
+      .catch(error => console.error('Gagal menyimpan event:', error));
   }
 
   return (
@@ -25,7 +58,7 @@ export default function App() {
         <button className='btn-event' onClick={() => { setSelectedEvent(null, toggleOffcanvas()); }}>
           Add Event
         </button>
-        <Sidebar
+        <Modal
           show={showOffcanvas}
           onHide={toggleOffcanvas}
           onAddEvent={handleAddEvent}

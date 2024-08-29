@@ -3,7 +3,7 @@ import './Sidebar.css';
 import moment from "moment";
 
 export default function Sidebar({ show, onHide, onAddEvent, selectedEvent }) {
-        const [title, setTitle] = useState('');
+        const [email, setEmail] = useState('');
         const [date, setDate] = useState('');
         const [startTime, setStartTime] = useState('');
         const [endTime, setEndTime] = useState('');
@@ -12,7 +12,7 @@ export default function Sidebar({ show, onHide, onAddEvent, selectedEvent }) {
         const handleSubmit = () => {
                 const newEvent = {
                         id: Math.random(),
-                        title,
+                        email,
                         start: moment(date).set({ hour: startTime.split(':')[0], minute: startTime.split(':')[1] }).toDate(),
                         end: moment(date).set({ hour: endTime.split(':')[0], minute: endTime.split(':')[1] }).toDate(),
                 };
@@ -27,12 +27,12 @@ export default function Sidebar({ show, onHide, onAddEvent, selectedEvent }) {
                                         <button className='close-btn' onClick={onHide}>Close</button>
                                 </div>
                                 <div className='sidebar-body'>
-                                        <label>Title</label>
+                                        <label>Email</label>
                                         <input
                                                 type="text"
-                                                placeholder="Event Title"
-                                                value={title}
-                                                onChange={(e) => setTitle(e.target.value)}
+                                                placeholder="Event Email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
                                         />
                                         <label>Date</label>
                                         <input
