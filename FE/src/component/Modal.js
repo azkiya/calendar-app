@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import './Modal.css';
-import moment from "moment";
 
 export default function Modal({ show, onHide, onAddEvent }) {
         const [email, setEmail] = useState('');
