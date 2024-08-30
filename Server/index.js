@@ -2,8 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config();
-const eventsRoute = require('./src/routes/events');
-const emailRoute = require('./src/routes/email');
+const email = require('./src/routes/email');
+const events = require('./src/routes/events');
 
 const app = express()
 const port = 3000
@@ -23,8 +23,8 @@ mongoose.connect(uri, {
         .catch((err) => console.error('Gagal terhubung ke MongoDB Atlas', err));
 
 // Route
-app.use('/api', eventsRoute);
-app.use('/email', emailRoute);
+events(app)
+email(app);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
