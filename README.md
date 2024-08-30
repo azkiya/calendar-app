@@ -57,7 +57,7 @@ Start the client
 
 **Database** MongoDB
 
-**Cliet:** React
+**Client:** React
 
 ## Authors
 

@@ -23,7 +23,7 @@ app.use(session({
 }));
 
 // String koneksi SRV
-const uri = 'mongodb+srv://fany:fanyDB@cluster0.107l7.mongodb.net/calendar?retryWrites=true&w=majority';
+const uri = process.env.URI_DB;
 
 // Koneksi ke MongoDB Atlas menggunakan Mongoose
 mongoose.connect(uri, {
