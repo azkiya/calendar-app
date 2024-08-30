@@ -55,7 +55,7 @@ export default function App() {
           recipientEmail: response.data.email,  // Kirim email ke alamat yang diinputkan
         };
 
-        axios.post('http://localhost:4000/email/send-email', emailData)
+        axios.post('http://localhost:4000/api/send-email', emailData)
           .then(emailResponse => {
             console.log('Email sent successfully:', emailResponse.data);
           })
