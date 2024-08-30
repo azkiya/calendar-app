@@ -37,7 +37,6 @@ export default function App() {
     setShowOffcanvas(!showOffcanvas);
   }
   const handleAddEvent = (newEvent) => {
-    // setEvents([...events, newEvent]);
     setShowOffcanvas(false);
     // Simpan event ke backend
     axios.post('http://localhost:4000/api/events', newEvent)
@@ -47,7 +46,22 @@ export default function App() {
           start: moment(response.data.date).startOf('day').toDate(),
           end: moment(response.data.date).endOf('day').toDate()
         };
+        //menampilkan email yg diadd
         setEvents(prevEvents => [...prevEvents, formattedEvent]);
+
+        // Kirim email setelah event berhasil disimpan
+        const emailData = {
+          senderEmail: 'isthofany.dev@gmail.com',  // Sesuaikan dengan email sender yang sudah divalidasi
+          recipientEmail: response.data.email,  // Kirim email ke alamat yang diinputkan
+        };
+
+        axios.post('http://localhost:4000/email/send-email', emailData)
+          .then(emailResponse => {
+            console.log('Email sent successfully:', emailResponse.data);
+          })
+          .catch(emailError => {
+            console.error('Failed to send email:', emailError);
+          });
       })
       .catch(error => console.error('Gagal menyimpan event:', error));
   }
