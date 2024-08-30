@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Event = require('../models/event');
 
 exports.list = async (req, res) => {
