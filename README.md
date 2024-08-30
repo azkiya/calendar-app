@@ -1,6 +1,7 @@
 
 # Calendar App
 Mini project for create event using big calendar
+![Demo](https://github.com/azkiya/calendar-email/blob/main/demo.gif)
 
 ## Run Locally
 
@@ -46,8 +47,17 @@ Start the client
 ```bash
   npm start
 ```
+### End Point
+list of end point
 
-
+| task | method|end point |
+| ------ | ------ | ------ |
+| list event  | GET | [localhost:4000/api/events] |
+| create event | POST | [localhost:4000/api/events] |
+| send email | POST | [localhost:4000/api/send-email] |
+| register user | POST | [localhost:4000/api/register] |
+| login | POST | [localhost:4000/api/login] |
+| logout | GET | [localhost:4000/api/logout] |
 
 ## Tech Stack
 

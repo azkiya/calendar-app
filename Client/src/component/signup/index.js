@@ -14,7 +14,6 @@ export default function Signup() {
 
         const handleSubmit = async (e) => {
                 e.preventDefault();
-
         }
 
         return (
