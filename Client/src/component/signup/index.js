@@ -9,11 +9,28 @@ export default function Signup() {
                 email: "",
                 password: ""
         });
-
+        const [errorMessage, setErrorMessage] = useState('');
         const navigate = useNavigate();
 
-        const handleSubmit = async (e) => {
+        const handleChange = (e) => {
+                const { name, value } = e.target;
+
+                setData(prevData => ({
+                        ...prevData,
+                        [name]: value
+                }));
+        };
+
+
+        const handleRegister = (e) => {
                 e.preventDefault();
+                axios.post('http://localhost:4000/api/register', data)
+                        .then(response => {
+                                navigate('/login')
+                        })
+                        .catch(error => {
+                                setErrorMessage('Failed to register: ' + error.response.data.error)
+                        })
         }
 
         return (
@@ -21,20 +38,20 @@ export default function Signup() {
                         <div className="signup-form-continer">
                                 <div className="left">
                                         <Link to="/login">
-                                                <button type="button" className="whit-btn">
+                                                <button type="button" className="white-btn">
                                                         Sign In
                                                 </button>
                                         </Link>
 
                                 </div>
                                 <div className="right">
-                                        <form className="form-container" onSubmit={handleSubmit}>
+                                        <form className="form-container" onSubmit={handleRegister}>
                                                 <h1> Create Account </h1>
                                                 <input
                                                         type="text"
                                                         placeholder="Insert your name"
                                                         name="name"
-                                                        onChange={(e) => setData.name(e.target.value)}
+                                                        onChange={handleChange}
                                                         value={data.name}
                                                         required
                                                         className="input"
@@ -43,7 +60,7 @@ export default function Signup() {
                                                         type="email"
                                                         placeholder="Insert your email"
                                                         name="email"
-                                                        onChange={(e) => setData.email(e.target.value)}
+                                                        onChange={handleChange}
                                                         value={data.email}
                                                         required
                                                         className="input"
@@ -52,12 +69,12 @@ export default function Signup() {
                                                         type="password"
                                                         placeholder="Insert your password"
                                                         name="password"
-                                                        onChange={(e) => setData.password(e.target.value)}
+                                                        onChange={handleChange}
                                                         value={data.password}
                                                         required
                                                         className="input"
                                                 />
-
+                                                {errorMessage && <div className="error-message">{errorMessage}</div>}
                                                 <button type="submit" className="green-btn">
                                                         Sign Up
                                                 </button>
