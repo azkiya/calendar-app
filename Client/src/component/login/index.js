@@ -22,7 +22,7 @@ export default function Signup() {
                 e.preventDefault();
                 axios.post('http://localhost:4000/api/login', data)
                         .then(response => {
-                                localStorage.setItem("token", response.data.token)
+                                localStorage.setItem("token", response.data.data.token)
                                 window.location = "/"
                         })
                         .catch(error => {
