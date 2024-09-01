@@ -32,7 +32,7 @@ export default function Signup() {
 
         return (
                 <div className="login-container">
-                        <div className="login-form-continer">
+                        <div className="login-form-container">
                                 <div className="left">
                                         <form className="form-container" onSubmit={handleLogin}>
                                                 <h1> Login to Your Account </h1>
@@ -55,7 +55,7 @@ export default function Signup() {
                                                         className="input"
                                                 />
                                                 {errorMessage && <div className="error-message">{errorMessage}</div>}
-                                                <button type="submit" className="green-btn">
+                                                <button type="submit" className="blue-btn">
                                                         Sign In
                                                 </button>
 

@@ -35,8 +35,9 @@ export default function Signup() {
 
         return (
                 <div className="signup-container">
-                        <div className="signup-form-continer">
-                                <div className="left">
+                        <div className="signup-form-container">
+                                <div className="signup-left">
+                                        <h1>Welcome Back</h1>
                                         <Link to="/login">
                                                 <button type="button" className="white-btn">
                                                         Sign In
@@ -44,7 +45,7 @@ export default function Signup() {
                                         </Link>
 
                                 </div>
-                                <div className="right">
+                                <div className="signup-right">
                                         <form className="form-container" onSubmit={handleRegister}>
                                                 <h1> Create Account </h1>
                                                 <input
@@ -75,7 +76,7 @@ export default function Signup() {
                                                         className="input"
                                                 />
                                                 {errorMessage && <div className="error-message">{errorMessage}</div>}
-                                                <button type="submit" className="green-btn">
+                                                <button type="submit" className="blue-btn">
                                                         Sign Up
                                                 </button>
 
