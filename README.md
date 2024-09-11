@@ -1,6 +1,6 @@
 
 # Calendar App
-[Article Medium Tutorial MERN] (https://medium.com/@azkiya/tutorial-calendar-email-menggunakan-mern-stack-0db73436ea31)
+[Article Medium Tutorial MERN](https://medium.com/@azkiya/tutorial-calendar-email-menggunakan-mern-stack-0db73436ea31)
 
 Mini project for create event using big calendar
 ![Demo](https://github.com/azkiya/calendar-email/blob/main/demo.gif)
